@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import heroBottle from "@/assets/hero-bottle.webp";
+import heroBottleSm from "@/assets/hero-bottle-760.webp";
 import heritageImg from "@/assets/heritage.webp";
 import pOud from "@/assets/p-oud.webp";
 import pRose from "@/assets/p-rose.webp";
@@ -99,9 +100,11 @@ function Index() {
             <div className="relative">
               <img
                 src={heroBottle}
+                srcSet={`${heroBottleSm} 760w, ${heroBottle} 1100w`}
+                sizes="(max-width: 768px) 92vw, 560px"
                 alt="Sarkar Royal Oud attar bottle on emerald silk with oud wood and roses"
-                width={1200}
-                height={1023}
+                width={1100}
+                height={938}
                 decoding="async"
                 fetchPriority="high"
                 className="w-full object-cover shadow-luxe"
