@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import heroBottle from "@/assets/hero-bottle.jpg";
-import heritageImg from "@/assets/heritage.jpg";
-import pOud from "@/assets/p-oud.jpg";
-import pRose from "@/assets/p-rose.jpg";
-import pMusk from "@/assets/p-musk.jpg";
-import pJannat from "@/assets/p-jannat.jpg";
+import heroBottle from "@/assets/hero-bottle.webp";
+import heritageImg from "@/assets/heritage.webp";
+import pOud from "@/assets/p-oud.webp";
+import pRose from "@/assets/p-rose.webp";
+import pMusk from "@/assets/p-musk.webp";
+import pJannat from "@/assets/p-jannat.webp";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,6 +24,9 @@ export const Route = createFileRoute("/")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [
+      { rel: "preload", as: "image", href: heroBottle, fetchPriority: "high" },
     ],
   }),
   component: Index,
@@ -97,8 +100,10 @@ function Index() {
               <img
                 src={heroBottle}
                 alt="Sarkar Royal Oud attar bottle on emerald silk with oud wood and roses"
-                width={1408}
-                height={1200}
+                width={1200}
+                height={1023}
+                decoding="async"
+                fetchPriority="high"
                 className="w-full object-cover shadow-luxe"
               />
             </div>
@@ -128,8 +133,9 @@ function Index() {
                     src={p.img}
                     alt={`${p.name} attar bottle by Sarkar Perfumes`}
                     loading="lazy"
-                    width={800}
-                    height={1000}
+                    width={600}
+                    height={750}
+                    decoding="async"
                     className="h-80 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   {p.tag && (
@@ -157,8 +163,9 @@ function Index() {
               src={heritageImg}
               alt="Artisans distilling rose attar in copper deg and bhapka vessels in Kannauj"
               loading="lazy"
-              width={1200}
-              height={912}
+              width={1000}
+              height={760}
+              decoding="async"
               className="w-full object-cover shadow-luxe"
             />
             <div>
