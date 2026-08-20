@@ -150,3 +150,45 @@
     color: var(--color-foreground);
   }
 }
+
+@theme inline {
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-ink: var(--ink);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    letter-spacing: 0.01em;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 300;
+  }
+}
+
+@utility text-gilded {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility rule-gold {
+  height: 1px;
+  background: var(--gradient-gold);
+}
+
+@utility shadow-luxe {
+  box-shadow: var(--shadow-luxe);
+}
+
+@utility eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
