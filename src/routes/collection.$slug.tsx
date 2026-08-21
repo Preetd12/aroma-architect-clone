@@ -7,9 +7,8 @@ import { categoryMeta, FAMILIES, productsByCategory, type Family } from "@/lib/p
 type Search = { family?: string };
 
 export const Route = createFileRoute("/collection/$slug")({
-  validateSearch: (search: Record<string, unknown>): Search => ({
-    family: typeof search["family"] === "string" ? search["family"] : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): Search =>
+    typeof search["family"] === "string" ? { family: search["family"] } : {},
   head: ({ params }) => {
     const meta = categoryMeta[params.slug] ?? { title: "Collection", blurb: "" };
     return {
