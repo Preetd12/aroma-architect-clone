@@ -198,3 +198,21 @@
   text-transform: uppercase;
   color: var(--muted-foreground);
 }
+
+@utility surface-panel {
+  background: linear-gradient(160deg, oklch(0.21 0.008 80), oklch(0.155 0.006 80));
+}
+
+@utility fade-up {
+  animation: sarkar-fade-up 0.5s ease both;
+}
+
+@keyframes sarkar-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+@layer base {
+  ::selection { background: var(--gold); color: var(--ink); }
+  html { scroll-behavior: smooth; }
+}
