@@ -77,7 +77,8 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
           const i = prev.findIndex((l) => l.slug === product.slug && l.size === size);
           if (i === -1) return [...prev, { slug: product.slug, size, qty, price }];
           const next = [...prev];
-          next[i] = { ...next[i], qty: next[i].qty + qty };
+          const existing = next[i]!;
+          next[i] = { ...existing, qty: existing.qty + qty };
           return next;
         }),
       setQty: (slug, size, qty) =>
