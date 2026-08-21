@@ -1,276 +1,294 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import heroBottle from "@/assets/hero-bottle.webp";
-import heroBottleSm from "@/assets/hero-bottle-760.webp";
-import heritageImg from "@/assets/heritage.webp";
-import pOud from "@/assets/p-oud.webp";
-import pRose from "@/assets/p-rose.webp";
-import pMusk from "@/assets/p-musk.webp";
-import pJannat from "@/assets/p-jannat.webp";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Star, ArrowRight } from "lucide-react";
+import heroImg from "@/assets/hero-sarkar.jpg";
+import storyImg from "@/assets/story.jpg";
+import giftImg from "@/assets/gift-set.jpg";
+import { PageShell, PromoStrip } from "@/components/site/Layout";
+import { ProductCard } from "@/components/site/ProductCard";
+import { categories, FAMILIES, products, testimonials } from "@/lib/products";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sarkar Perfumes — Handcrafted Indian Attars & Oud" },
+      { title: "Sarkar Perfumes — Luxury Oud, Attars & Parfums | Crafted for Presence" },
       {
         name: "description",
         content:
-          "Sarkar Perfumes crafts alcohol-free attars, oud and mukhallats using traditional Kannauj deg-bhapka distillation. Shop long-lasting Indian fragrances.",
+          "Shop Sarkar Perfumes: long-lasting oud, amber, musk and leather parfums plus alcohol-free attars and gift sets. Free shipping in India above ₹1,499.",
       },
-      { property: "og:title", content: "Sarkar Perfumes — Handcrafted Indian Attars & Oud" },
+      { property: "og:title", content: "Sarkar Perfumes — A Scent That Leaves a Mark" },
       {
         property: "og:description",
-        content:
-          "Alcohol-free attars, royal oud and mukhallats distilled the traditional way in Kannauj.",
+        content: "Luxury Indian parfums, attars and gift sets. Crafted for Presence.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [
-      {
-        rel: "preload",
-        as: "image",
-        href: heroBottle,
-        imageSrcSet: `${heroBottleSm} 760w, ${heroBottle} 1100w`,
-        imageSizes: "(max-width: 768px) 92vw, 560px",
-        fetchPriority: "high",
-      },
-    ],
+    links: [{ rel: "preload", as: "image", href: heroImg, fetchPriority: "high" }],
   }),
-  component: Index,
+  component: Home,
 });
 
-const products = [
-  { name: "Royal Oud", notes: "Agarwood · Saffron · Amber", price: "₹2,450", img: pOud, tag: "Bestseller" },
-  { name: "Gulab Kannauj", notes: "Rose Damask · Honey · Sandal", price: "₹1,890", img: pRose, tag: "" },
-  { name: "White Musk", notes: "Musk · Vanilla · Iris", price: "₹1,250", img: pMusk, tag: "" },
-  { name: "Jannat-ul-Firdaus", notes: "Herbs · Spice · Vetiver", price: "₹2,100", img: pJannat, tag: "New" },
-];
-
-const collections = [
-  { title: "Attars", copy: "Alcohol-free oils, aged in sandalwood base." },
-  { title: "Oud & Mukhallat", copy: "Deep, resinous blends for the evening." },
-  { title: "Ruh & Florals", copy: "Single-flower distillations of the season." },
-];
-
-function Index() {
-  const [email, setEmail] = useState("");
+function Home() {
+  const featured = products.filter((p) => p.bestseller);
+  const arrivals = products.filter((p) => p.isNew);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#top" className="font-display text-2xl tracking-[0.3em] uppercase">
-            Sarkar
-          </a>
-          <nav className="hidden gap-8 text-xs uppercase tracking-[0.2em] md:flex">
-            {["Attars", "Oud", "Gifting", "Heritage"].map((l) => (
-              <a key={l} href="#shop" className="text-muted-foreground transition-colors hover:text-accent">
-                {l}
-              </a>
-            ))}
-          </nav>
-          <a
-            href="#shop"
-            className="border border-accent px-4 py-2 text-[0.65rem] uppercase tracking-[0.2em] text-accent-foreground transition-colors hover:bg-accent"
-          >
-            Shop
-          </a>
+    <PageShell>
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-ink">
+        <img
+          src={heroImg}
+          alt="Matte black Sarkar perfume bottle with gold cap in golden smoke"
+          width={1600}
+          height={1104}
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover opacity-60"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-transparent" />
+        <div className="relative mx-auto max-w-7xl px-5 py-28 md:py-40">
+          <div className="max-w-xl fade-up">
+            <p className="text-[0.6rem] tracking-[0.45em] text-gold uppercase">Crafted for Presence</p>
+            <h1 className="mt-6 font-display text-5xl leading-[1.05] text-cream md:text-7xl">
+              A Scent That
+              <br />
+              Leaves a Mark
+            </h1>
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
+              High-concentration parfums and alcohol-free attars, composed in India and filled in
+              matte-black crest bottles. Built to last through heat, distance and long evenings.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link
+                to="/collection/$slug"
+                params={{ slug: "unisex" }}
+                className="bg-gold px-8 py-4 text-[0.65rem] tracking-[0.25em] text-accent-foreground transition-opacity hover:opacity-90"
+              >
+                SHOP NOW
+              </Link>
+              <Link
+                to="/collection/$slug"
+                params={{ slug: "new-arrivals" }}
+                className="border border-gold/50 px-8 py-4 text-[0.65rem] tracking-[0.25em] text-gold transition-colors hover:bg-gold hover:text-accent-foreground"
+              >
+                EXPLORE COLLECTION
+              </Link>
+            </div>
+          </div>
         </div>
-      </header>
+      </section>
 
-      <main id="top">
-        <section className="relative overflow-hidden bg-primary text-primary-foreground">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2 md:py-28">
-            <div>
-              <p className="eyebrow text-gold-soft">Since 1932 · Kannauj, India</p>
-              <h1 className="mt-6 font-display text-5xl leading-[1.05] md:text-7xl">
-                The scent of a<br />
-                <span className="text-gilded italic">thousand roses</span>
-              </h1>
-              <p className="mt-6 max-w-md text-sm leading-relaxed text-primary-foreground/70">
-                Attars distilled in copper deg and bhapka, aged in sandalwood oil, and bottled by
-                hand. No alcohol. No shortcuts. Only the raw perfume of the field.
-              </p>
-              <div className="mt-10 flex flex-wrap items-center gap-6">
-                <a
-                  href="#shop"
-                  className="bg-gold px-8 py-3 text-[0.7rem] uppercase tracking-[0.25em] text-accent-foreground transition-opacity hover:opacity-90"
-                >
-                  Explore the house
-                </a>
-                <a href="#heritage" className="text-[0.7rem] uppercase tracking-[0.25em] text-gold-soft">
-                  Our craft →
-                </a>
-              </div>
-            </div>
-            <div className="relative">
+      <PromoStrip />
+
+      {/* Categories */}
+      <section className="mx-auto max-w-7xl px-5 py-20">
+        <SectionHead eyebrow="Browse" title="Shop by Category" />
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {categories.map((c) => (
+            <Link
+              key={c.slug}
+              to="/collection/$slug"
+              params={{ slug: c.slug }}
+              className="group relative overflow-hidden border border-border"
+            >
               <img
-                src={heroBottle}
-                srcSet={`${heroBottleSm} 760w, ${heroBottle} 1100w`}
-                sizes="(max-width: 768px) 92vw, 560px"
-                alt="Sarkar Royal Oud attar bottle on emerald silk with oud wood and roses"
-                width={1100}
-                height={938}
-                decoding="async"
-                fetchPriority="high"
-                className="w-full object-cover shadow-luxe"
+                src={c.image}
+                alt={c.title}
+                loading="lazy"
+                width={800}
+                height={1000}
+                className="h-64 w-full object-cover opacity-70 transition-all duration-700 group-hover:scale-105 group-hover:opacity-90"
               />
-            </div>
-          </div>
-        </section>
+              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-6">
+                <h3 className="font-display text-2xl text-cream">{c.title}</h3>
+                <p className="mt-1 text-xs text-muted-foreground">{c.copy}</p>
+                <span className="mt-3 inline-flex items-center gap-2 text-[0.6rem] tracking-[0.25em] text-gold">
+                  DISCOVER <ArrowRight className="h-3 w-3" />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
-        <section className="border-y border-border bg-secondary">
-          <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-x-14 gap-y-3 px-6 py-5 text-[0.65rem] uppercase tracking-[0.25em] text-muted-foreground">
-            <span>Alcohol free</span>
-            <span>Hand distilled</span>
-            <span>12+ hour longevity</span>
-            <span>Free shipping over ₹999</span>
-          </div>
-        </section>
-
-        <section id="shop" className="mx-auto max-w-6xl px-6 py-24">
-          <div className="text-center">
-            <p className="eyebrow">The Collection</p>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">Signature Attars</h2>
-            <div className="rule-gold mx-auto mt-6 w-24" />
-          </div>
-          <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-            {products.map((p) => (
-              <article key={p.name} className="group">
-                <div className="relative overflow-hidden bg-secondary">
-                  <img
-                    src={p.img}
-                    alt={`${p.name} attar bottle by Sarkar Perfumes`}
-                    loading="lazy"
-                    width={600}
-                    height={750}
-                    decoding="async"
-                    className="h-80 w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  {p.tag && (
-                    <span className="absolute left-0 top-4 bg-primary px-3 py-1 text-[0.6rem] uppercase tracking-[0.2em] text-primary-foreground">
-                      {p.tag}
-                    </span>
-                  )}
-                </div>
-                <h3 className="mt-5 font-display text-2xl">{p.name}</h3>
-                <p className="mt-1 text-xs tracking-wide text-muted-foreground">{p.notes}</p>
-                <div className="mt-3 flex items-center justify-between">
-                  <span className="text-sm">{p.price}</span>
-                  <button className="text-[0.65rem] uppercase tracking-[0.2em] text-accent-foreground underline decoration-accent underline-offset-4">
-                    Add to bag
-                  </button>
-                </div>
-              </article>
+      {/* Featured */}
+      <section className="border-y border-border bg-secondary/30">
+        <div className="mx-auto max-w-7xl px-5 py-20">
+          <SectionHead eyebrow="Featured Collection" title="Best Sellers" />
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {featured.map((p) => (
+              <ProductCard key={p.slug} product={p} />
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="heritage" className="bg-secondary">
-          <div className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-24 md:grid-cols-2">
-            <img
-              src={heritageImg}
-              alt="Artisans distilling rose attar in copper deg and bhapka vessels in Kannauj"
-              loading="lazy"
-              width={1000}
-              height={760}
-              decoding="async"
-              className="w-full object-cover shadow-luxe"
-            />
-            <div>
-              <p className="eyebrow">Heritage</p>
-              <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">
-                Four generations of <span className="italic">deg &amp; bhapka</span>
-              </h2>
-              <div className="rule-gold mt-6 w-20" />
-              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-                Every Sarkar attar begins before sunrise, when petals are still cool with dew. They
-                are loaded into copper degs, sealed with clay, and coaxed over a wood fire for hours
-                until the vapour condenses into sandalwood oil.
-              </p>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                The oil is then aged in leather kuppis — sometimes for years — until it settles into
-                the scent our family has carried since 1932.
-              </p>
-              <div className="mt-10 grid grid-cols-3 gap-6 border-t border-border pt-8">
-                {[
-                  ["90+", "Years of craft"],
-                  ["40k", "Petals per tola"],
-                  ["100%", "Alcohol free"],
-                ].map(([n, l]) => (
-                  <div key={l}>
-                    <div className="font-display text-3xl text-accent-foreground">{n}</div>
-                    <div className="mt-1 text-[0.65rem] uppercase tracking-[0.2em] text-muted-foreground">
-                      {l}
-                    </div>
+      {/* Fragrance families */}
+      <section className="mx-auto max-w-7xl px-5 py-20">
+        <SectionHead eyebrow="Fragrance Families" title="Find Your Accord" />
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          {FAMILIES.map((f) => (
+            <Link
+              key={f}
+              to="/collection/$slug"
+              params={{ slug: "unisex" }}
+              search={{ family: f }}
+              className="border border-border px-6 py-3 text-[0.65rem] tracking-[0.22em] text-muted-foreground uppercase transition-colors hover:border-gold hover:text-gold"
+            >
+              {f}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Brand story */}
+      <section className="border-y border-border surface-panel">
+        <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-20 md:grid-cols-2">
+          <img
+            src={storyImg}
+            alt="Brass attar vials and a copper still in the Sarkar atelier"
+            loading="lazy"
+            width={1400}
+            height={1000}
+            className="w-full object-cover shadow-luxe"
+          />
+          <div>
+            <p className="text-[0.6rem] tracking-[0.4em] text-gold uppercase">Our Story</p>
+            <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">
+              Indian perfumery,
+              <br />
+              refined for today
+            </h2>
+            <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+              India has worn perfume oil for centuries — attar pressed into the wrist, oud smoked
+              through fabric, rose distilled at dawn. Sarkar takes that inheritance and composes it
+              with modern precision: higher oil load, cleaner drydowns, and no shortcuts on raw
+              material.
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              Every batch is macerated for a minimum of six weeks before filling, which is why our
+              parfums open softer and stay far longer than the market average.
+            </p>
+            <div className="mt-10 grid grid-cols-3 gap-6 border-t border-border pt-8">
+              {[
+                ["30%", "Oil concentration"],
+                ["12 hrs", "Average longevity"],
+                ["6 wks", "Minimum maceration"],
+              ].map(([n, l]) => (
+                <div key={l}>
+                  <div className="font-display text-3xl text-gold">{n}</div>
+                  <div className="mt-1 text-[0.6rem] tracking-[0.2em] text-muted-foreground uppercase">
+                    {l}
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* New arrivals */}
+      <section className="mx-auto max-w-7xl px-5 py-20">
+        <SectionHead eyebrow="Just Landed" title="New Arrivals" />
+        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {arrivals.map((p) => (
+            <ProductCard key={p.slug} product={p} />
+          ))}
+        </div>
+      </section>
+
+      {/* Gift sets */}
+      <section className="relative overflow-hidden border-y border-border bg-ink">
+        <img
+          src={giftImg}
+          alt="Sarkar gift set with matte black crest box, corded bag and two parfums"
+          loading="lazy"
+          width={1408}
+          height={912}
+          className="absolute inset-0 h-full w-full object-cover opacity-45"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/70 to-transparent" />
+        <div className="relative mx-auto max-w-7xl px-5 py-24">
+          <div className="max-w-lg">
+            <p className="text-[0.6rem] tracking-[0.4em] text-gold uppercase">Gifting</p>
+            <h2 className="mt-4 font-display text-4xl text-cream md:text-5xl">
+              Wrapped in the crest box
+            </h2>
+            <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+              Matte-black rigid boxes with gold-foil SARKAR lettering, a cream information card and a
+              corded carry bag. Add a handwritten note at checkout — we never include a price slip.
+            </p>
+            <Link
+              to="/collection/$slug"
+              params={{ slug: "gift-sets" }}
+              className="mt-8 inline-block bg-gold px-8 py-4 text-[0.65rem] tracking-[0.25em] text-accent-foreground"
+            >
+              SHOP GIFT SETS
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="mx-auto max-w-7xl px-5 py-20">
+        <SectionHead eyebrow="Reviews" title="What Our Clients Say" />
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {testimonials.map((t) => (
+            <figure key={t.name} className="border border-border bg-card p-8">
+              <div className="flex gap-1 text-gold">
+                {Array.from({ length: t.rating }).map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-gold" />
                 ))}
               </div>
-            </div>
-          </div>
-        </section>
+              <blockquote className="mt-5 text-sm leading-relaxed text-muted-foreground">
+                “{t.text}”
+              </blockquote>
+              <figcaption className="mt-6 text-[0.65rem] tracking-[0.2em] uppercase">
+                {t.name} <span className="text-muted-foreground">· {t.city}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
 
-        <section className="mx-auto max-w-6xl px-6 py-24">
-          <div className="grid gap-8 md:grid-cols-3">
-            {collections.map((c) => (
+      {/* Instagram gallery */}
+      <section className="border-t border-border bg-secondary/30">
+        <div className="mx-auto max-w-7xl px-5 py-16">
+          <SectionHead eyebrow="@sarkarperfumes" title="From the Atelier" />
+          <div className="mt-10 grid grid-cols-3 gap-3 lg:grid-cols-6">
+            {products.slice(0, 6).map((p) => (
               <a
-                key={c.title}
-                href="#shop"
-                className="group border border-border p-10 transition-colors hover:border-accent"
+                key={p.slug}
+                href="https://instagram.com"
+                target="_blank"
+                rel="noreferrer"
+                className="group relative overflow-hidden border border-border"
               >
-                <h3 className="font-display text-3xl">{c.title}</h3>
-                <p className="mt-3 text-sm text-muted-foreground">{c.copy}</p>
-                <span className="mt-8 inline-block text-[0.65rem] uppercase tracking-[0.25em] text-accent-foreground">
-                  Discover →
-                </span>
+                <img
+                  src={p.image}
+                  alt={`${p.name} on the Sarkar Perfumes Instagram`}
+                  loading="lazy"
+                  width={800}
+                  height={1000}
+                  className="aspect-square w-full object-cover opacity-80 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
+                />
               </a>
             ))}
           </div>
-        </section>
-
-        <section className="bg-primary text-primary-foreground">
-          <div className="mx-auto max-w-2xl px-6 py-24 text-center">
-            <p className="eyebrow text-gold-soft">The Perfumer's Letter</p>
-            <h2 className="mt-4 font-display text-4xl">Notes from Kannauj</h2>
-            <p className="mt-4 text-sm text-primary-foreground/70">
-              Seasonal harvests, new distillations and private-batch releases.
-            </p>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="mx-auto mt-10 flex max-w-md flex-col gap-3 sm:flex-row"
-            >
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email"
-                aria-label="Email address"
-                className="flex-1 border border-primary-foreground/25 bg-transparent px-4 py-3 text-sm placeholder:text-primary-foreground/40 focus:border-gold focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="bg-gold px-7 py-3 text-[0.7rem] uppercase tracking-[0.25em] text-accent-foreground"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </section>
-      </main>
-
-      <footer className="border-t border-border bg-background">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-6 py-12 text-center">
-          <span className="font-display text-xl uppercase tracking-[0.35em]">Sarkar</span>
-          <p className="text-xs text-muted-foreground">
-            Perfumers of Kannauj, Uttar Pradesh · hello@sarkarperfumes.com
-          </p>
-          <p className="text-[0.65rem] uppercase tracking-[0.2em] text-muted-foreground">
-            © {new Date().getFullYear()} Sarkar Perfumes
-          </p>
         </div>
-      </footer>
+      </section>
+    </PageShell>
+  );
+}
+
+function SectionHead({ eyebrow, title }: { eyebrow: string; title: string }) {
+  return (
+    <div className="text-center">
+      <p className="text-[0.6rem] tracking-[0.4em] text-gold uppercase">{eyebrow}</p>
+      <h2 className="mt-4 font-display text-4xl md:text-5xl">{title}</h2>
+      <div className="rule-gold mx-auto mt-6 w-20" />
     </div>
   );
 }

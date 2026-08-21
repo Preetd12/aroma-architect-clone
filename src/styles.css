@@ -66,31 +66,32 @@
 }
 
 :root {
-  --radius: 0.25rem;
-  --background: oklch(0.985 0.012 85);
-  --foreground: oklch(0.22 0.03 55);
-  --card: oklch(0.995 0.008 90);
-  --card-foreground: oklch(0.22 0.03 55);
-  --popover: oklch(0.995 0.008 90);
-  --popover-foreground: oklch(0.22 0.03 55);
-  --primary: oklch(0.28 0.055 155);
-  --primary-foreground: oklch(0.97 0.02 90);
-  --secondary: oklch(0.95 0.025 85);
-  --secondary-foreground: oklch(0.28 0.055 155);
-  --muted: oklch(0.95 0.02 85);
-  --muted-foreground: oklch(0.5 0.03 70);
-  --accent: oklch(0.72 0.115 78);
-  --accent-foreground: oklch(0.2 0.03 60);
-  --destructive: oklch(0.55 0.2 27);
+  --radius: 0.125rem;
+  --background: oklch(0.145 0.006 80);
+  --foreground: oklch(0.945 0.012 85);
+  --card: oklch(0.19 0.006 80);
+  --card-foreground: oklch(0.945 0.012 85);
+  --popover: oklch(0.17 0.006 80);
+  --popover-foreground: oklch(0.945 0.012 85);
+  --primary: oklch(0.78 0.1 82);
+  --primary-foreground: oklch(0.16 0.01 80);
+  --secondary: oklch(0.235 0.006 80);
+  --secondary-foreground: oklch(0.945 0.012 85);
+  --muted: oklch(0.235 0.006 80);
+  --muted-foreground: oklch(0.7 0.012 82);
+  --accent: oklch(0.78 0.1 82);
+  --accent-foreground: oklch(0.16 0.01 80);
+  --destructive: oklch(0.6 0.2 27);
   --destructive-foreground: oklch(0.98 0.01 90);
-  --border: oklch(0.89 0.02 85);
-  --input: oklch(0.89 0.02 85);
-  --ring: oklch(0.72 0.115 78);
-  --gold: oklch(0.72 0.115 78);
-  --gold-soft: oklch(0.85 0.07 82);
-  --ink: oklch(0.19 0.03 150);
-  --gradient-gold: linear-gradient(100deg, oklch(0.66 0.1 70), oklch(0.85 0.09 88), oklch(0.68 0.11 72));
-  --shadow-luxe: 0 24px 60px -30px oklch(0.28 0.055 155 / 0.5);
+  --border: oklch(0.3 0.008 80);
+  --input: oklch(0.3 0.008 80);
+  --ring: oklch(0.78 0.1 82);
+  --gold: oklch(0.78 0.1 82);
+  --gold-soft: oklch(0.88 0.06 85);
+  --cream: oklch(0.94 0.02 88);
+  --ink: oklch(0.115 0.005 80);
+  --gradient-gold: linear-gradient(100deg, oklch(0.68 0.09 72), oklch(0.9 0.08 90), oklch(0.72 0.1 74));
+  --shadow-luxe: 0 30px 70px -35px oklch(0 0 0 / 0.85);
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "Karla", system-ui, sans-serif;
   --chart-1: oklch(0.646 0.222 41.116);
@@ -158,6 +159,7 @@
 @theme inline {
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
+  --color-cream: var(--cream);
   --color-ink: var(--ink);
   --font-display: var(--font-display);
   --font-body: var(--font-body);
@@ -195,4 +197,22 @@
   letter-spacing: 0.34em;
   text-transform: uppercase;
   color: var(--muted-foreground);
+}
+
+@utility surface-panel {
+  background: linear-gradient(160deg, oklch(0.21 0.008 80), oklch(0.155 0.006 80));
+}
+
+@utility fade-up {
+  animation: sarkar-fade-up 0.5s ease both;
+}
+
+@keyframes sarkar-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+@layer base {
+  ::selection { background: var(--gold); color: var(--ink); }
+  html { scroll-behavior: smooth; }
 }
