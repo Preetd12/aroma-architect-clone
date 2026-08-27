@@ -7,6 +7,9 @@ import pCitrus from "@/assets/p-citrus-elixir.jpg";
 import pAttars from "@/assets/attars.jpg";
 import pTravel from "@/assets/travel.jpg";
 import pGift from "@/assets/gift-set.jpg";
+import bottleNoir from "@/assets/bottle-noir.svg";
+import bottleAmber from "@/assets/bottle-amber.svg";
+import bottleBlue from "@/assets/bottle-blue.svg";
 
 export type Family =
   | "Oud"
@@ -78,7 +81,7 @@ export const products: Product[] = [
     reviewCount: 214,
     categories: ["men", "unisex"],
     families: ["Oud", "Woody", "Spicy"],
-    image: pOud,
+    image: bottleNoir,
     sizes: standardSizes,
     notes: {
       top: ["Black Pepper", "Saffron"],
@@ -115,7 +118,7 @@ export const products: Product[] = [
     reviewCount: 168,
     categories: ["unisex", "men"],
     families: ["Vanilla", "Woody", "Spicy"],
-    image: pAmber,
+    image: bottleAmber,
     sizes: standardSizes,
     notes: {
       top: ["Bergamot", "Pink Pepper"],
@@ -146,7 +149,7 @@ export const products: Product[] = [
     reviewCount: 302,
     categories: ["men", "unisex"],
     families: ["Fresh", "Musk", "Citrus"],
-    image: pMusk,
+    image: bottleBlue,
     sizes: standardSizes,
     notes: {
       top: ["Sicilian Lemon", "Sea Salt"],
@@ -176,7 +179,7 @@ export const products: Product[] = [
     reviewCount: 141,
     categories: ["women", "unisex"],
     families: ["Floral", "Oud", "Musk"],
-    image: pRose,
+    image: bottleAmber,
     sizes: standardSizes,
     notes: {
       top: ["Kannauj Rose", "Raspberry"],
@@ -207,7 +210,7 @@ export const products: Product[] = [
     reviewCount: 96,
     categories: ["men"],
     families: ["Leather", "Woody", "Spicy"],
-    image: pLeather,
+    image: bottleNoir,
     sizes: standardSizes,
     notes: {
       top: ["Cardamom", "Birch"],
@@ -238,7 +241,7 @@ export const products: Product[] = [
     reviewCount: 187,
     categories: ["unisex", "women"],
     families: ["Citrus", "Fresh", "Woody"],
-    image: pCitrus,
+    image: bottleBlue,
     sizes: standardSizes,
     notes: {
       top: ["Bergamot", "Yuzu", "Neroli"],
