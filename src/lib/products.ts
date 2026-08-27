@@ -10,6 +10,9 @@ import pGift from "@/assets/gift-set.jpg";
 import bottleNoir from "@/assets/bottle-noir.svg";
 import bottleAmber from "@/assets/bottle-amber.svg";
 import bottleBlue from "@/assets/bottle-blue.svg";
+import bottleRose from "@/assets/bottle-rose.svg";
+import bottleLeather from "@/assets/bottle-leather.svg";
+import bottleCitrus from "@/assets/bottle-citrus.svg";
 
 export type Family =
   | "Oud"
@@ -179,7 +182,7 @@ export const products: Product[] = [
     reviewCount: 141,
     categories: ["women", "unisex"],
     families: ["Floral", "Oud", "Musk"],
-    image: bottleAmber,
+    image: bottleRose,
     sizes: standardSizes,
     notes: {
       top: ["Kannauj Rose", "Raspberry"],
@@ -210,7 +213,7 @@ export const products: Product[] = [
     reviewCount: 96,
     categories: ["men"],
     families: ["Leather", "Woody", "Spicy"],
-    image: bottleNoir,
+    image: bottleLeather,
     sizes: standardSizes,
     notes: {
       top: ["Cardamom", "Birch"],
@@ -241,7 +244,7 @@ export const products: Product[] = [
     reviewCount: 187,
     categories: ["unisex", "women"],
     families: ["Citrus", "Fresh", "Woody"],
-    image: bottleBlue,
+    image: bottleCitrus,
     sizes: standardSizes,
     notes: {
       top: ["Bergamot", "Yuzu", "Neroli"],
